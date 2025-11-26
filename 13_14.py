@@ -7,7 +7,7 @@ print(df)
 print(df.columns.tolist())
 print(df.sample(10))
 print(df.describe())
-print(df.describe())
+print(df.info())
 
 
 firstdose=df.groupby("State")["First Dose Administered"].sum().astype(int).sort_values(ascending=False)

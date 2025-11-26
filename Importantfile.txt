@@ -157,7 +157,140 @@ print(pred_label)
 Question_6_7_8 ke hisab se test dataset change karo.
 
 
+Question 11
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df=pd.read_csv("IRIS.csv")
+print(df.head())
+
+num_cols=df.describe().columns
+for x in num_cols:
+    plt.figure(figsize=(10,5))
+    sns.histplot(df[x],bins=20,kde=True)
+    plt.xlabel(f"Histogram with respect to {x}")
+    plt.ylabel("Values")
+    plt.show()
+    
 
 
+Question 12 
+sns.boxplot(x="sepal_width",y="petal_width",data=df)
+plt.show()
+
+sns.boxplot(x="sepal_width",data=df)
+plt.show()
+
+for col in df.select_dtypes(include="number").columns:
+    plt.figure()
+    plt.boxplot(df[col])
+    plt.show()
+
+
+
+Question 13 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+df = pd.read_csv("Covid Vaccine Statewise.csv")
+print(df)
+print(df.columns.tolist())
+print(df.sample(10))
+print(df.describe())
+print(df.describe())
+
+
+firstdose=df.groupby("State")["First Dose Administered"].sum().astype(int).sort_values(ascending=False)
+print(firstdose)
+
+seconddose=df.groupby("State")["Second Dose Administered"].sum().astype(int).sort_values(ascending=False)
+print(seconddose)
+
+
+Question 14	
+# df["Male(Individuals Vaccinated)"]=df["Male(Individuals Vaccinated)"].fillna(0)
+print(df["Male(Individuals Vaccinated)"].fillna(0).sum().astype(int))
+
+print(df["Female(Individuals Vaccinated)"].fillna(0).sum().astype(int))
+
+
+Question 15 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df=sns.load_dataset("titanic")
+print(df.select_dtypes(include="number").columns)
+sns.countplot(x="sex",hue="survived",data=df)
+plt.show()
+
+sns.countplot(x="class",hue="survived",data=df)
+plt.title("Aisa Hi Timepass")
+plt.show()
+
+
+sns.boxplot(x="class",y="fare",data=df)
+plt.show()
+
+Question 16 
+plt.figure(figsize=(10,10))
+sns.histplot(x="fare",bins=30,kde=True,data=df)
+plt.xlabel("Fare")
+plt.ylabel("Frequency")
+plt.show()
+
+
+Question 18 
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+df=pd.read_csv("House Data.csv")
+print(df)
+
+cols=df.select_dtypes(include="object").columns.to_list()
+print(cols)
+
+df["NetSquareMeters"]=pd.to_numeric(df["NetSquareMeters"].str.replace(r"[^0-9]","",regex=True),errors="coerce")
+df["NetSquareMeters"]=df["NetSquareMeters"]/10
+df["NetSquareMeters"]=df["NetSquareMeters"].astype(int)
+print(df["NetSquareMeters"])
+
+df["NumberOfRooms"]=pd.to_numeric(df["NumberOfRooms"].str.replace(r"[^0-9]","",regex=True),errors="coerce")
+print(df["NumberOfRooms"])
+
+
+df1=df.groupby("Category")["NumberOfRooms"].agg(["mean","max","min","std","count"])
+print(df1)
+
+df2=df.groupby("district")["NetSquareMeters"].agg(["mean","max","min","std","count"])
+print(df2)
+
+df3=df.groupby("NumberOfRooms")["NetSquareMeters"].agg(["mean","median","max","min","count"])
+print(df3)
+
+
+Question 19 
+import pandas as pd
+import matplotlib.pyplot as plt
+df=pd.read_csv("IRIS.csv")
+df
+ls=df["species"].unique().tolist()
+ls
+for col in ls:
+    spe=df[df["species"]==col]
+    print(spe.describe())
+df.groupby("species").describe()
+
+
+
+Question 24 and 25 
+Pura man se.
+handle data , calculate unique variables in data , format of each column , change datatype , deal with missing values 
 
 
