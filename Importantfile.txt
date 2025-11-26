@@ -293,4 +293,20 @@ Question 24 and 25
 Pura man se.
 handle data , calculate unique variables in data , format of each column , change datatype , deal with missing values 
 
+#Replace the Categorical Columns with Mode
+catwalecol=df.select_dtypes(include="object").columns
+catwalecol
 
+for col in catwalecol:
+    df[col]=df[col].fillna(df[col].mode()[0])
+
+df.isna().sum()    
+
+#Normalize Numeric Features 
+from sklearn.preprocessing import MinMaxScaler
+sc=MinMaxScaler()
+df[["pricenorm","GrossSquareMetersNorm"]]=sc.fit_transform(df[["price","GrossSquareMeters"]])
+
+#Replace the numeircal column's NaN either with Median , Mean
+df["price"]=df["price"].fillna(df["price"].mean())
+df.isna().sum()
