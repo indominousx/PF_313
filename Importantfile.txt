@@ -439,3 +439,51 @@ m2new=df[df["Cluster"]==2][X].mean().values
 print(m1new,m2new)
 
 
+Pendrive:
+
+1. Clear system logs
+sudo truncate -s 0 /var/log/syslog
+sudo truncate -s 0 /var/log/kern.log
+
+
+2.To delete all logs completely:
+sudo rm -rf /var/log/journal/*
+sudo systemctl restart systemd-journald
+
+3.Clear file manager “recent files” history
+rm ~/.local/share/recently-used.xbel
+
+4.Clear USB auto-mount history
+rm ~/.cache/gvfs-metadata/*
+
+5.Clear shell history
+history -c
+history -w
+
+
+
+GIT:
+# 1. Clear terminal history
+history -c
+history -w
+
+# 2. Clear Git user configuration & credentials (if used)
+rm -f ~/.gitconfig
+rm -f ~/.git-credentials
+
+# 3. Clear file manager recent files history
+rm -f ~/.local/share/recently-used.xbel
+
+# 4. Clear thumbnail cache
+rm -rf ~/.cache/thumbnails/*
+
+# 5. Clear GVFS metadata (mount & file cache)
+rm -rf ~/.cache/gvfs-metadata/*
+
+# 6. Clear APT package cache
+sudo apt clean
+sudo apt autoclean
+
+# 7. Flush DNS cache
+sudo systemd-resolve --flush-caches
+
